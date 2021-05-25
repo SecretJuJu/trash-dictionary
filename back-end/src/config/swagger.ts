@@ -1,17 +1,12 @@
 const swaggerDefinition = {
     info: {
-        title: "TS-EXPRESS-MONGOOSE-USER-BOILERPLATE",
+        title: "trash-dictionary-api",
         version: "1.0.0",
         description: "Backend REST API server",
         contact: {
-            name: "YeonGyu Kim",
-            email: "code.yeon.gyu@gmail.com",
-        },
-    },
-    securityDefinitions: {
-        oAuth: {
-            type: "oauth2",
-            authorizationUrl: "/user/auth/token",
+            name: "Ji SeungBo",
+            email: "dev.tmdqh@gmail.com",
+            facebook_messages: "https://www.facebook.com/profile.php?id=100041042641605"
         },
     },
     basePath: "/",

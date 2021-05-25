@@ -1,13 +1,13 @@
 import dotenv from "dotenv"
-dotenv.config()
 
 import express from "express"
-import swaggerUI from "swagger-ui-express"
 import { ErrorType, errorMessages } from "errors"
-import connectDB from "config/connectDB"
-connectDB()
-
+import { sync } from "models"
 import app from "app"
+
+dotenv.config()
+
+const PORT = process.env.PORT || 3000
 
 app.get("/custom-errors", (req: express.Request, res: express.Response) => {
     res.json({
@@ -16,4 +16,7 @@ app.get("/custom-errors", (req: express.Request, res: express.Response) => {
     })
 })
 
-app.listen(process.env.PORT || 3000)
+app.listen(PORT, () => {
+    sync()
+    console.log('Server listening on port ' +PORT)
+})
