@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './search.css'
 
 // search component must include text input form & axios things and remove this comment later !
 export class Search extends React.Component<{},{keyword: string}> {

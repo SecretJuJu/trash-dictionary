@@ -1,0 +1,31 @@
+.search-wrapper {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    background-color: #054d95;
+    justify-content: center;
+}
+
+.search-wrapper> form {
+    height: 80%;
+    display: flex;
+    width: 90%;
+}
+.search-wrapper> form >input[type="text"] {
+    outline: none;
+    background-color: #fff;
+    border: none;
+    text-align: center;
+    color: rgb(23, 23, 23);
+    width: 75%;
+    border-radius: unset;
+}
+.search-wrapper> form >button[type="submit"] {
+    border: none;
+    border-left: 1px solid;
+    font-weight: bold;
+    width: 23%;
+    background-color: #fff;
+    border-radius: unset;
+}
