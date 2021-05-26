@@ -7,7 +7,7 @@ import app from "app"
 
 dotenv.config()
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 app.get("/custom-errors", (req: express.Request, res: express.Response) => {
     res.json({
