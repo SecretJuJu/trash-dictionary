@@ -21,7 +21,7 @@ describe("Admin", async function () {
         })
     })
 
-    describe("Register", function () {
+    describe("Register", () => {
         describe("Success Cases", async function () {
             it("Normal Register",async ()=>{
                 const response = await request(app)
@@ -81,7 +81,58 @@ describe("Admin", async function () {
             })
         })
     })
-
+    describe("Login", () => {
+        describe("Success Cases", async function () {
+            it("Normal Login",async ()=>{
+                const response = await request(app)
+                .post("/api/admin/auth")
+                .send({
+                    email: email,
+                    password: password
+                })
+    
+                if (response.body.token && response.body.admin.email === email) {
+                    assert(true)
+                } else {
+                    console.log("===== Normal login failed ======")
+                    console.log(response.body)
+                    assert(false)
+                }
+            })
+        })
+        describe("Error Cases", async function () {
+            it("without password",async ()=>{
+                const response = await request(app)
+                .post("/api/admin/auth")
+                .send({
+                    username: username,
+                    email: email
+                })
+                const { errorType } = JSON.parse(response.text)
+                assert.strictEqual(errorType, ErrorType.ValidationError)
+            })
+            it("wrong password",async ()=>{
+                const response = await request(app)
+                .post("/api/admin/auth")
+                .send({
+                    email: email,
+                    password: password+"11"
+                })
+                const { errorType } = JSON.parse(response.text)
+                assert.strictEqual(errorType, ErrorType.LoginFailed)
+            })
+            it("wrong email",async ()=>{
+                const response = await request(app)
+                .post("/api/admin/auth")
+                .send({
+                    email: "aa"+email,
+                    password: password
+                })
+                const { errorType } = JSON.parse(response.text)
+                assert.strictEqual(errorType, ErrorType.LoginFailed)
+            })
+        })
+    })
     after(async function () {
         await Admin.destroy({
             where: {},
