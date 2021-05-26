@@ -12,7 +12,7 @@ interface IjwtPayload {
     username: string
 }
 
-const strategies = () => {
+const setPassport = () => {
     passport.use(
         new LocalStrategy(
             {
@@ -66,4 +66,4 @@ const strategies = () => {
     )
 }
 
-export default strategies
+export default setPassport
