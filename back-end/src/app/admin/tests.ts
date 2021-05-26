@@ -22,7 +22,7 @@ describe("Admin", async function () {
     })
 
     describe("Register", () => {
-        describe("Success Cases", async function () {
+        describe("Success Cases", async () => {
             it("Normal Register",async ()=>{
                 const response = await request(app)
                 .post("/api/admin/register")
@@ -42,7 +42,7 @@ describe("Admin", async function () {
                 }
             })
         })
-        describe("Error Cases", async function () {
+        describe("Error Cases", async () => {
             it("not valid email",async ()=>{
                 const response = await request(app)
                 .post("/api/admin/register")
@@ -82,8 +82,8 @@ describe("Admin", async function () {
         })
     })
     describe("Login", () => {
-        describe("Success Cases", async function () {
-            it("Normal Login",async ()=>{
+        describe("Success Cases", async () => {
+            it("Normal Login",async () => {
                 const response = await request(app)
                 .post("/api/admin/auth")
                 .send({
@@ -100,8 +100,8 @@ describe("Admin", async function () {
                 }
             })
         })
-        describe("Error Cases", async function () {
-            it("without password",async ()=>{
+        describe("Error Cases", async () => {
+            it("without password",async () => {
                 const response = await request(app)
                 .post("/api/admin/auth")
                 .send({
@@ -111,7 +111,7 @@ describe("Admin", async function () {
                 const { errorType } = JSON.parse(response.text)
                 assert.strictEqual(errorType, ErrorType.ValidationError)
             })
-            it("wrong password",async ()=>{
+            it("wrong password",async () => {
                 const response = await request(app)
                 .post("/api/admin/auth")
                 .send({
@@ -121,7 +121,7 @@ describe("Admin", async function () {
                 const { errorType } = JSON.parse(response.text)
                 assert.strictEqual(errorType, ErrorType.LoginFailed)
             })
-            it("wrong email",async ()=>{
+            it("wrong email",async () => {
                 const response = await request(app)
                 .post("/api/admin/auth")
                 .send({
@@ -133,7 +133,7 @@ describe("Admin", async function () {
             })
         })
     })
-    after(async function () {
+    after(async () => {
         await Admin.destroy({
             where: {},
             truncate: true
