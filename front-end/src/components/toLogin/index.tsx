@@ -10,9 +10,10 @@ export class ToLogin extends React.Component<{},{isLogined: boolean,loading:bool
         super(props)
         this.state = {isLogined: false, loading:true}
         this.checkLogined = this.checkLogined.bind(this)
+    }
+    componentDidMount(){
         this.checkLogined()
     }
-    
     checkLogined = async () => {
         let token = localStorage.getItem('token')
         if (token) {
