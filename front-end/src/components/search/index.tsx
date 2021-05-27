@@ -1,7 +1,6 @@
 import React from 'react'
 import './search.css'
 
-// search component must include text input form & axios things and remove this comment later !
 export class Search extends React.Component<{},{keyword: string}> {
   constructor(props: any) {
     super(props)
@@ -26,6 +25,8 @@ export class Search extends React.Component<{},{keyword: string}> {
         <input type="text" value={this.state.keyword} onChange={this.handleChange}/>
         <button type="submit">search</button>
       </form>
-    </div>;
+    </div>
+    
+    ;
   }
 }
