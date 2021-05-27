@@ -38,6 +38,10 @@ export class Register extends React.Component<{},{}> {
                     
                     <div className="button">
                         <button type="submit">Register</button>
+                        
+                    </div>
+                    <div className="at-regiter-to-login">
+                        <Link to="/login">login으로</Link>
                     </div>
                 </div>
             </form>

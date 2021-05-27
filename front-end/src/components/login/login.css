@@ -1,27 +1,29 @@
+
 .login-wrapper {
     width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 85%;
 }
 
 .login {
     width: 100%;
-    height: 70%;
     background: #fff;
     box-sizing: content-box;
     border: solid #5B6DCD 10px;
     padding: 5px;
+    height: 100%;
+    overflow: scroll;
+    display: flex;
 }
 
 .login> form {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: scroll;
 }
 
 .login> form> div {
@@ -29,7 +31,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 10%;
     width: 80%;
 }
 
