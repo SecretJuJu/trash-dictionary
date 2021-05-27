@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import './login.css'
 
-export class Login extends React.Component<{},{keyword: string}> {
+export class Login extends React.Component<{},{}> {
   
   render() {
     return <div className="login-wrapper">
@@ -17,9 +18,11 @@ export class Login extends React.Component<{},{keyword: string}> {
                         <label htmlFor="#passwordInput">password</label>
                         <input type="password" placeholder="***********" id="passwordInput" />
                     </div>
-                    <div className="buttons">
+                    <div className="button">
                         <button type="submit">Login</button>
-                        <button>Register</button>
+                    </div>
+                    <div className="to-register">
+                        관리자가 아니신가요? 함께하기 -&gt; <Link to="/register">register</Link>
                     </div>
                 </div>
             </form>
