@@ -1,21 +1,20 @@
+#root {
+    padding-top:0;
+}
 
 .login-wrapper {
     width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 85%;
+    overflow: scroll;
 }
 
 .login {
     width: 100%;
     background: #fff;
     box-sizing: content-box;
-    border: solid #5B6DCD 10px;
-    padding: 5px;
-    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     overflow: scroll;
-    display: flex;
 }
 
 .login> form {
