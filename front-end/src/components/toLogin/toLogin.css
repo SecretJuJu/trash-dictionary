@@ -6,7 +6,8 @@
 }
 
 .to-login-welcome,
-.to-login {
+.to-login,
+.to-login-loading {
     margin-right: 5%;
     height: 35px;
 }
@@ -21,8 +22,7 @@
     margin-right: 20px;
 }
 
-#to-login-btn {
-    background: #fff;
-    border: 1px solid #000;
-    border-radius: 0;
+#to-login-link {
+    text-decoration: underline;
+    color: #fff;
 }

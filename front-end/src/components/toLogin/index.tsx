@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios';
 import env from '../../config/env'
-
+import {Link} from "react-router-dom";
 import './toLogin.css'
 
-export class ToLogin extends React.Component<{},{isLogined: boolean}> {
+export class ToLogin extends React.Component<{},{isLogined: boolean,loading:boolean}> {
     
     constructor(props: any) {
         super(props)
-        this.state = {isLogined: false}
+        this.state = {isLogined: false, loading:true}
         this.checkLogined = this.checkLogined.bind(this)
         this.checkLogined()
     }
-
+    
     checkLogined = async () => {
         let token = localStorage.getItem('token')
         if (token) {
@@ -30,6 +30,8 @@ export class ToLogin extends React.Component<{},{isLogined: boolean}> {
                 localStorage.removeItem('user')
             }
         }
+        this.setState({loading: false})
+        return
     }
 
     getAdminName = () => {
@@ -37,21 +39,28 @@ export class ToLogin extends React.Component<{},{isLogined: boolean}> {
         if ( userString ) {
             const user = JSON.parse(userString)
             return user.username
-        } 
-        return "who the fuck are you"
+        } else {
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            window.location.reload(false);
+            return ""
+        }
     }
-
+    
     render() {
         return <div className="to-login-wrapper">
             {
-                this.state.isLogined?
-                <div className="to-login-welcome">
-                    <span>안녕하세요</span>&nbsp;<strong>{this.getAdminName()}</strong>님
-                </div>
-                :<div className="to-login">
-                    <label htmlFor="to-login-btn">관리자이신가요? 로그인하러 가기 -&gt;</label>
-                    <button id="to-login-btn" className="btn">Login</button>
-                </div>
+                this.state.loading?
+                    <span className="to-login-loading">로딩중...</span>
+                :
+                    this.state.isLogined?
+                    <div className="to-login-welcome">
+                        <span>안녕하세요</span>&nbsp;<strong>{this.getAdminName()}</strong>님
+                    </div>
+                    :<div className="to-login">
+                        <label htmlFor="to-login-link">관리자이신가요? 로그인하러 가기 -&gt;</label>
+                        <Link to="/login" id="to-login-link" className="btn">Login</Link>
+                    </div>
             }
         </div>;
     }
