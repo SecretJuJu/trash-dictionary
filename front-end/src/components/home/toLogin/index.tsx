@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import env from '../../config/env'
+import env from '../../../config/env'
 import {Link} from "react-router-dom";
 import './toLogin.css'
 
@@ -56,7 +56,10 @@ export class ToLogin extends React.Component<{},{isLogined: boolean,loading:bool
                 :
                     this.state.isLogined?
                     <div className="to-login-welcome">
-                        <span>안녕하세요</span>&nbsp;<strong>{this.getAdminName()}</strong>님
+                        <p>
+                            <span>안녕하세요</span>&nbsp;<strong>{this.getAdminName()}</strong>님
+                        </p>
+                        <Link to="/logout" id="to-logout-link">logout</Link>
                     </div>
                     :<div className="to-login">
                         <label htmlFor="to-login-link">관리자이신가요? 로그인하러 가기 -&gt;</label>

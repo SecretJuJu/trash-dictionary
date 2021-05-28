@@ -9,7 +9,11 @@
 .to-login,
 .to-login-loading {
     margin-right: 5%;
+    display: flex;
     height: 35px;
+    flex-flow: column;
+    align-items: flex-end;
+    line-height: 100%;
 }
 
 .to-login {
@@ -25,4 +29,10 @@
 #to-login-link {
     text-decoration: underline;
     color: #fff;
+}
+
+.to-login-welcome a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
 }

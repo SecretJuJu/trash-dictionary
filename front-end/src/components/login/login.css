@@ -49,11 +49,15 @@
 }
 
 .button > button{
-    background: #5B6DCD;
+    background: #5b6dcd;
     height: 35px;
     border: 1px solid #fef;
     color: #FDF;
     margin-top:8px;
+}
+
+.button .loading-btn {
+    background: #6c80f1;
 }
 
 .to-register {
