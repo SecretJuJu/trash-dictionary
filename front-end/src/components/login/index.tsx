@@ -1,91 +1,92 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import env from '../../config/env'
+
 import './login.css'
-import { Redirect } from "react-router-dom";
+import { useState } from 'react';
 
-export class Login extends React.Component<{},{
-    email: string,
-    password: string,
-    loading: boolean,
-    redirect: string 
-}> {
-    constructor(props: any) {
-        super(props)
-        this.state = {email:'', password: '', loading: false, redirect: ""}
-    
-        this.doLogin = this.doLogin.bind(this)
-        this.handleEmailChange = this.handleEmailChange.bind(this)
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    }
+export const Login = () => {
+    const [values, setValues] = useState({ email: "", password: "" });
+    const [redirect, setRedirect] = useState("")
+    const [loading, toggleLoading] = useState(false);
 
-    handleEmailChange = (event: any) => {
-        this.setState({email:event.target.value});
-    }
-    handlePasswordChange = (event: any) => {
-        this.setState({password:event.target.value});
-    }
-    doLogin = async (e: any) => {
-        e.preventDefault();
-        this.setState({loading: true})
-        let user,token, response, errorType, errorMsg;
+    const handleChange = (event: any) => {
+        const { name, value } = event.target;
+        setValues({ ...values, [name]: value });
+    };
+
+    const handleSubmit = async (event:any) => {
+
+        event.preventDefault();
+        console.log(values)
+        let user,token, response, errorType, errorMsg, refresh=false;
         try {
+            toggleLoading(true)
             response = await axios.post(env.BACKEND_BASEURL+'/api/admin/auth',{
-                email: this.state.email,
-                password: this.state.password
+                email: values.email,
+                password: values.password
             })
             user = response.data?.admin
             token = response.data?.token
             errorType = response.data?.errorType
             errorMsg = response.data?.msg
+            
         } catch (err) {
+            console.log(response)
             alert("unecpected error"+err)
+            
+            refresh = true
             console.log(err)
         } finally {
-            this.setState({loading: false})
+            toggleLoading(false)
         }
-        
+        if (refresh) {
+            window.location.reload();
+            return
+        }
         if ( errorType ) {
             alert(errorType+"\n"+errorMsg)
-            this.setState({redirect: "/login"})
+            window.location.reload();
         } else {
             localStorage.setItem("user",JSON.stringify(user))
             localStorage.setItem("token",token)
             alert("login success!")
-            this.setState({redirect: "/"})
+            setRedirect("/")
         }
-
-        
     }
 
-    render() {
-        if (this.state.redirect !== "") {
-            return <Redirect to={this.state.redirect} />
-        }
-        return <div className="login-wrapper">
+    if (redirect !== "") {
+        return <Redirect to="/" />
+    }
+    return (
+        <>
+        
+        <div className="login-wrapper">
             <div className="login">
-                <form onSubmit={this.doLogin}>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <div className="email">
                             <label htmlFor="#emailInput">email</label>
-                            <input type="text" placeholder="helloworld@example.com" id="emailInput" 
-                                value={this.state.email} 
-                                onChange={this.handleEmailChange}
+                            <input type="email" placeholder="helloworld@example.com" id="emailInput"
+                                name="email"
                                 required={true}
+                                value={values.email}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className="password"> 
                             <label htmlFor="#passwordInput">password</label>
-                            <input type="password" placeholder="***********" id="passwordInput" 
-                                value={this.state.password} 
-                                onChange={this.handlePasswordChange}
+                            <input type="password" placeholder="***********" id="passwordInput"
+                                name="password"
                                 required={true}
+                                value={values.password}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className="button">
                             {
-                                this.state.loading ?
+                                loading ?
                                   <button type="submit" className="loading-btn" disabled>Login</button>
                                 : <button type="submit">Login</button>
                             }
@@ -98,5 +99,6 @@ export class Login extends React.Component<{},{
                 </form>
             </div>
         </div>
-    }
+        </>
+    )
 }
