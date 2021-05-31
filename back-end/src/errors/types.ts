@@ -1,8 +1,8 @@
 enum ErrorType {
     UnexpectedError = "unexpectedError",
     ValidationError = "validationError",
-    EmailExist = "Email Already Exists",
-    UsernameExist = "Username Already Exist",
+    EmailExist = "EmailAlreadyExist",
+    UsernameExist = "UsernameAlreadyExist",
     LoginFailed = "loginFailed",
     AccessDenied = "accessDenied"
 }
