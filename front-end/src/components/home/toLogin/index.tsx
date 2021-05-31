@@ -1,71 +1,55 @@
-import React from 'react'
-import axios from 'axios';
-import env from '../../../config/env'
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import {Link, Redirect} from "react-router-dom";
 import './toLogin.css'
 
-export class ToLogin extends React.Component<{},{isLogined: boolean,loading:boolean}> {
+export const ToLogin = () => {
+
+    const [isLogined, setIsLogined] = useState(false);
+    useEffect(() => {
+        checkLogined()
+    }, []);
     
-    constructor(props: any) {
-        super(props)
-        this.state = {isLogined: false, loading:true}
-        this.checkLogined = this.checkLogined.bind(this)
-    }
-    componentDidMount(){
-        this.checkLogined()
-    }
-    checkLogined = async () => {
-        let token = localStorage.getItem('token')
-        if (token) {
-            console.log(env)
-            const response = await axios.get(env.BACKEND_BASEURL+'/api/admin/tokenCheck',{
-                headers: {
-                    Authorization: 'bearer '+token
-                }
-            })
-            console.log(response)
-            if (response.data.result) {
-                this.setState({isLogined: true})
-            } else {
-                localStorage.removeItem('token')
-                localStorage.removeItem('user')
-            }
+    const checkLogined = async () => {
+        const token = localStorage.getItem('token')
+        const user = localStorage.getItem('user')
+        if (token && user) {
+            setIsLogined(true);
+        } else {
+            setIsLogined(false);
         }
-        this.setState({loading: false})
-        return
     }
 
-    getAdminName = () => {
+    const getAdminName = () => {
         const userString = localStorage.getItem('user')
         if ( userString ) {
-            const user = JSON.parse(userString)
-            return user.username
+            try {
+                const user = JSON.parse(userString)
+                return user.username
+            } catch (e) {
+                return <Redirect to="/logout"/>
+            }
         } else {
-            localStorage.removeItem('token')
-            localStorage.removeItem('user')
-            window.location.reload(false);
-            return ""
+            return <Redirect to="/logout"/>
         }
     }
     
-    render() {
-        return <div className="to-login-wrapper">
+    return( 
+        <>
+        <div className="to-login-wrapper">
             {
-                this.state.loading?
-                    <span className="to-login-loading">로딩중...</span>
-                :
-                    this.state.isLogined?
-                    <div className="to-login-welcome">
-                        <p>
-                            <span>안녕하세요</span>&nbsp;<strong>{this.getAdminName()}</strong>님
-                        </p>
-                        <Link to="/logout" id="to-logout-link">logout</Link>
-                    </div>
-                    :<div className="to-login">
-                        <label htmlFor="to-login-link">관리자이신가요? 로그인하러 가기 -&gt;</label>
-                        <Link to="/login" id="to-login-link" className="btn">Login</Link>
-                    </div>
+                isLogined?
+                <div className="to-login-welcome">
+                    <p>
+                        <span>안녕하세요</span>&nbsp;<strong>{getAdminName()}</strong>님
+                    </p>
+                    <Link to="/logout" id="to-logout-link">logout</Link>
+                </div>
+                :<div className="to-login">
+                    <label htmlFor="to-login-link">관리자이신가요? 로그인하러 가기 -&gt;</label>
+                    <Link to="/login" id="to-login-link" className="btn">Login</Link>
+                </div>
             }
-        </div>;
-    }
+        </div>
+        </>
+    )
 }

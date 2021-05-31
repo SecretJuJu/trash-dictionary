@@ -20,7 +20,8 @@ export const Login = () => {
 
         event.preventDefault();
         console.log(values)
-        let user,token, response, errorType, errorMsg, refresh=false;
+        let user,token, response, err, errorType, errorMsg;
+        
         try {
             toggleLoading(true)
             response = await axios.post(env.BACKEND_BASEURL+'/api/admin/auth',{
@@ -29,30 +30,28 @@ export const Login = () => {
             })
             user = response.data?.admin
             token = response.data?.token
-            errorType = response.data?.errorType
-            errorMsg = response.data?.msg
             
-        } catch (err) {
-            console.log(response)
-            alert("unecpected error"+err)
-            
-            refresh = true
-            console.log(err)
+        } catch (error) {
+            err = error
+            if(error?.response?.data?.errorType === 'loginFailed') {
+                errorType = error?.response?.data?.errorType
+                errorMsg = error?.response?.data?.msg
+            }
         } finally {
             toggleLoading(false)
         }
-        if (refresh) {
-            window.location.reload();
-            return
-        }
+        
         if ( errorType ) {
-            alert(errorType+"\n"+errorMsg)
+            alert(errorType+"\n\nmsg : "+errorMsg)
             window.location.reload();
-        } else {
+        } else if(!err && token && user) {
             localStorage.setItem("user",JSON.stringify(user))
             localStorage.setItem("token",token)
             alert("login success!")
             setRedirect("/")
+        } else {
+            window.location.reload();
+            return
         }
     }
 
