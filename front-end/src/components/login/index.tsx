@@ -56,7 +56,7 @@ export const Login = () => {
     }
 
     if (redirect !== "") {
-        return <Redirect to="/" />
+        return <Redirect to={redirect} />
     }
     return (
         <>

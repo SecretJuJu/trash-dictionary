@@ -51,7 +51,9 @@
     font-size: medium;
     line-height: 100%;
 }
-
+.password .hints {
+    font-size: xx-small;
+}
 .secret-code> p {
     font-size: small;
 }
@@ -68,7 +70,9 @@
     display: flex;
     flex-direction: row;
 }
-
+.button .loading-btn {
+    background: #6c80f1;
+}
 .at-regiter-to-login a {
     color: #000;
     text-decoration: underline;
