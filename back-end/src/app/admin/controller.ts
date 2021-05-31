@@ -6,6 +6,7 @@ import { ErrorType } from 'errors'
 import Admin from 'models/admin.model'
 import passport from 'passport'
 import * as jwt from 'jsonwebtoken'
+import { Op } from 'sequelize'
 
 export const register = async (req: express.Request, res: express.Response) => {
     const { username, email, password, secretCode } = req.body
@@ -13,15 +14,21 @@ export const register = async (req: express.Request, res: express.Response) => {
         return res.status(400).json(getErrorMessage(ErrorType.AccessDenied))
     }
     const hashedPassword = await createHashedPassword(password)
-    const alreadyExist = await Admin.findOne({where: {username, email}, raw: true})
-    if (alreadyExist != null) {
-        if (alreadyExist?.username === username) {
-            return res.status(400).json(getErrorMessage(ErrorType.UsernameExist))
-        } else {
-            return res.status(400).json(getErrorMessage(ErrorType.EmailExist))
+    try {
+        const alreadyExist = await Admin.findOne({where: {
+            [Op.or]: [{ username }, { email }]
+        }, raw: true})
+        if (alreadyExist != null) {
+            if (alreadyExist?.username === username) {
+                return res.status(400).json(getErrorMessage(ErrorType.UsernameExist))
+            } else {
+                return res.status(400).json(getErrorMessage(ErrorType.EmailExist))
+            }
         }
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(getErrorMessage(ErrorType.UnexpectedError))
     }
-    
     try {
         await Admin.create({
             username,email,password: hashedPassword
