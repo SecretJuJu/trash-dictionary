@@ -12,7 +12,12 @@ const registerValidator = [
     body("email")
         .notEmpty().isEmail(),
     body("password")
-        .notEmpty().isStrongPassword(),
+        .notEmpty().isStrongPassword({
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1
+        }),
     body("secretCode")
         .notEmpty().isString(),
     validationResultChecker
