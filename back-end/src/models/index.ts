@@ -4,6 +4,7 @@ import { Sequelize } from 'sequelize-typescript'
 import env from 'config/env'
 
 import Admin from 'models/admin.model'
+// import Feed from 'models/feed.model'
 
 const { DB_NAME, DB_USER_NAME, DB_PASSWORD, DB_HOST } = env.DB_CONFIG
 
@@ -13,8 +14,8 @@ const sequelize = new Sequelize({
     password: DB_PASSWORD,
     host: DB_HOST,
     logging: false,
-    dialect: 'mysql',
-    models: [Admin]
+    dialect: 'postgres',
+    models: [Admin], //Feed
 });
 
 

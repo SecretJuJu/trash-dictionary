@@ -6,8 +6,8 @@ const config = {
         DB_HOST: process.env.DB_HOST || "localhost",
         DB_NAME: (process.env.NODE_ENV === "test")? "trash_dictionary_api_test"
             :process.env.DB_NAME || "trash_dictionary_api",
-        DB_USER_NAME: process.env.DB_USER || "trash-dictionary",
-        DB_PASSWORD: process.env.DB_PASSWORD || "trash-dictionary",    
+        DB_USER_NAME: process.env.DB_USER || "trash_dictionary",
+        DB_PASSWORD: process.env.DB_PASSWORD || "trash_dictionary",    
     }
 }
 
