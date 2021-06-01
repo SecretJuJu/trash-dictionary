@@ -1,5 +1,5 @@
 import { Table, Column, Model, HasMany, IsUUID, PrimaryKey, Default, DataType, Unique, AllowNull, IsEmail } from 'sequelize-typescript'
-// import Feed from 'models/feed.model'
+import Feed from 'models/feed.model'
 
 @Table
 export default class Admin extends Model {
@@ -27,6 +27,6 @@ export default class Admin extends Model {
   email : string
 
 
-  // @HasMany(() => Feed)
-  // posts: Feed[]
+  @HasMany(() => Feed)
+  feeds: Feed[]
 }
