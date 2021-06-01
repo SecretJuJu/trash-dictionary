@@ -19,7 +19,6 @@ export const Login = () => {
     const handleSubmit = async (event:any) => {
 
         event.preventDefault();
-        console.log(values)
         let user,token, response, err, errorType, errorMsg;
         
         try {
@@ -33,10 +32,16 @@ export const Login = () => {
             
         } catch (error) {
             err = error
-            if(error?.response?.data?.errorType === 'loginFailed') {
+            if (!error.response) {
+                alert("서버 응답없음...")
+            } else if ( error?.response?.status !== 400) {
+                alert("알 수 없는 에러 발생...")
+                return
+            } else if(error?.response?.data?.errorType === 'loginFailed') {
                 errorType = error?.response?.data?.errorType
                 errorMsg = error?.response?.data?.msg
             }
+            
         } finally {
             toggleLoading(false)
         }
@@ -92,7 +97,10 @@ export const Login = () => {
                                 
                         </div>
                         <div className="to-register">
-                            관리자가 아니신가요? 함께하기 -&gt; <Link to="/register">register</Link>
+                            관리자가 아니신가요? 함께하기 &nbsp;&nbsp;<Link to="/register">register</Link>
+                        </div>
+                        <div className="to-home">
+                            관리자가 아니신가요? 뒤로가기 &nbsp;&nbsp;<Link to="/">Home</Link>
                         </div>
                     </div>
                 </form>

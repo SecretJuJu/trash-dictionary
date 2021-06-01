@@ -13,8 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   display: flex;
-  height: 100vh;
-  background-color: #054d95;
+  height: 100vh; /*9ecdfc*/
+  background-color: #fff;
 }
 
 code {

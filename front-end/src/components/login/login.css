@@ -60,12 +60,12 @@
     background: #6c80f1;
 }
 
-.to-register {
+.to-register, .to-home {
     display: flex;
     flex-direction: row;
 }
 
-.to-register a {
+.to-register a, .to-home a {
     color: #000;
     text-decoration: underline;
 }

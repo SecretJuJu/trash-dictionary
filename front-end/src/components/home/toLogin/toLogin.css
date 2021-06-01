@@ -3,6 +3,9 @@
     color: #fff;
     display: flex;
     justify-content: flex-end;
+    background: #0a6cce;
+    FONT-WEIGHT: 500;
+    padding: 5px 0 5px;
 }
 
 .to-login-welcome,
@@ -17,7 +20,6 @@
 }
 
 .to-login {
-    border: 2px solid #748BFF;
     padding: 10px;
     border-bottom: 0;
 }

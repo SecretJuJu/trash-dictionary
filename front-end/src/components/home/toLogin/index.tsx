@@ -7,8 +7,15 @@ export const ToLogin = () => {
     const [isLogined, setIsLogined] = useState(false);
     useEffect(() => {
         checkLogined()
+        setTimeout(() => {
+            // no display
+            hideLogin()
+        },10000)
     }, []);
-    
+    const hideLogin = () => {
+        const toLoginWarpperEl: any= document.querySelector('.to-login-wrapper');
+        toLoginWarpperEl.style.display = 'none';
+    }
     const checkLogined = async () => {
         const token = localStorage.getItem('token')
         const user = localStorage.getItem('user')

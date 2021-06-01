@@ -64,8 +64,10 @@ export const Register = () => {
             flag = response?.data?.result? true: false
         } catch (error) {
             err = error
+            alert(error)
             if (!error.response) {
                 alert("서버 응답없음...")
+                return
             } else if ( error?.response?.status !== 400) {
                 alert("알 수 없는 에러 발생...")
                 return
@@ -78,7 +80,7 @@ export const Register = () => {
             alert("회원가입 성공")
             setRedirect("/login")
         } else {
-            const { errorType, msg } = err?.response.data
+            const { errorType, msg } = err?.response?.data
             console.log(err.response.data)
             if (errorType === "UsernameAlreadyExist") {
                 alert("중복된 유저네임이 존재합니다.\n"+msg)
