@@ -9,7 +9,14 @@ export const Search = (props: any) => {
   }
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(keyword)
+    const data = [
+      {
+        "title":"dasdnoajdoa",
+        "content":"dasdsadsa"
+      }
+    ]
+    console.log(props)
+    props.onSearchResponse(data)
   }
   return (
     <div className="search-wrapper">

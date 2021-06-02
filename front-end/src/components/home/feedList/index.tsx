@@ -1,6 +1,7 @@
 import React from 'react';
 import './feedList.css'
 
+
 export const FeedList = () => {
     return (
         <>

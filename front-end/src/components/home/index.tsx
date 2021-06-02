@@ -5,12 +5,14 @@ import React from 'react'
 
 import './home.css'
 
-
 export const Home = () => {
+  const handleSearchResponse = (response:any) => {
+    console.log(response)
+  }
   return (
     <>
       <div className="home">
-          <Search />
+          <Search onSearchResponse={handleSearchResponse}/>
           <FeedList />
           <ToLogin />
       </div>
