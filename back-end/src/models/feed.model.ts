@@ -1,4 +1,4 @@
-import { Table, Column, Model, IsUUID, PrimaryKey, Default, DataType, Unique, AllowNull, IsEmail, BelongsTo, ForeignKey } from 'sequelize-typescript'
+import { Table, Column, Model, IsUUID, PrimaryKey, Default, DataType, AllowNull, BelongsTo, ForeignKey } from 'sequelize-typescript'
 import Admin from './admin.model'
 
 @Table
@@ -21,6 +21,7 @@ export default class Feed extends Model {
     @Column(DataType.JSON)
     content: string
 
+    @AllowNull(false)
     @ForeignKey(() => Admin)
     @Column
     writterId: string
