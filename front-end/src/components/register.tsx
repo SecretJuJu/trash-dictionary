@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom';
-import env from '../../config/env'
-import './register.css'
+import env from '../config/env'
+import '../styles/register.css'
 
 export const Register = () => {
     const passwordConfirmInputEl = useRef(null)

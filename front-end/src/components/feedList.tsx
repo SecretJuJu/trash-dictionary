@@ -1,5 +1,4 @@
-import React from 'react';
-import './feedList.css'
+import '../styles/feedList.css'
 
 
 export const FeedList = () => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import {Link, Redirect} from "react-router-dom";
-import './toLogin.css'
+import {Link, useHistory} from "react-router-dom";
+import '../styles/toLogin.css'
 
 export const ToLogin = () => {
-
+    const history = useHistory();
     const [isLogined, setIsLogined] = useState(false);
     useEffect(() => {
         checkLogined()
@@ -33,10 +33,10 @@ export const ToLogin = () => {
                 const user = JSON.parse(userString)
                 return user.username
             } catch (e) {
-                return <Redirect to="/logout"/>
+                return history.push('/logout')
             }
         } else {
-            return <Redirect to="/logout"/>
+            history.push('/logout')
         }
     }
     

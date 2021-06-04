@@ -1,9 +1,8 @@
-import { ToLogin } from './toLogin'
-import { Search } from './search'
-import { FeedList } from './feedList'
-import React from 'react'
+import { ToLogin } from '../components/toLogin'
+import { Search } from '../components/search'
+import { FeedList } from '../components/feedList'
 
-import './home.css'
+import '../styles/home.css'
 
 export const Home = () => {
   const handleSearchResponse = (response:any) => {

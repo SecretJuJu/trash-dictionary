@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './search.css'
+import '../styles/search.css'
 
 export const Search = (props: any) => {
   const [keyword, setKeyword] = useState("")

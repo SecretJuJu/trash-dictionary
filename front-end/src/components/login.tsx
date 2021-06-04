@@ -1,16 +1,14 @@
-import React from 'react'
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import env from '../../config/env'
-
-import './login.css'
+import env from '../config/env'
+import '../styles/login.css'
 import { useState } from 'react';
 
 export const Login = () => {
     const [values, setValues] = useState({ email: "", password: "" });
     const [redirect, setRedirect] = useState("")
     const [loading, toggleLoading] = useState(false);
-
+    const history = useHistory()
     const handleChange = (event: any) => {
         const { name, value } = event.target;
         setValues({ ...values, [name]: value });
@@ -19,6 +17,7 @@ export const Login = () => {
     const handleSubmit = async (event:any) => {
 
         event.preventDefault();
+        console.log(values)
         let user,token, response, err, errorType, errorMsg;
         
         try {
@@ -32,16 +31,10 @@ export const Login = () => {
             
         } catch (error) {
             err = error
-            if (!error.response) {
-                alert("서버 응답없음...")
-            } else if ( error?.response?.status !== 400) {
-                alert("알 수 없는 에러 발생...")
-                return
-            } else if(error?.response?.data?.errorType === 'loginFailed') {
+            if(error?.response?.data?.errorType === 'loginFailed') {
                 errorType = error?.response?.data?.errorType
                 errorMsg = error?.response?.data?.msg
             }
-            
         } finally {
             toggleLoading(false)
         }
@@ -61,7 +54,7 @@ export const Login = () => {
     }
 
     if (redirect !== "") {
-        return <Redirect to={redirect} />
+        history.push(redirect)
     }
     return (
         <>
@@ -97,7 +90,7 @@ export const Login = () => {
                                 
                         </div>
                         <div className="to-register">
-                            관리자가 아니신가요? 함께하기 &nbsp;&nbsp;<Link to="/register">register</Link>
+                            관리자가 아니신가요? 함께하기 &nbsp;&nbsp; <Link to="/register">register</Link>
                         </div>
                         <div className="to-home">
                             관리자가 아니신가요? 뒤로가기 &nbsp;&nbsp;<Link to="/">Home</Link>
