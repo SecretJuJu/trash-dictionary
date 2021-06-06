@@ -1,7 +1,10 @@
 import { Table, Column, Model, HasMany, IsUUID, PrimaryKey, Default, DataType, Unique, AllowNull, IsEmail } from 'sequelize-typescript'
 import Feed from 'models/feed.model'
 
-@Table
+@Table({
+  tableName: "admins",
+  freezeTableName: true
+})
 export default class Admin extends Model {
   @IsUUID(4)
   @PrimaryKey
