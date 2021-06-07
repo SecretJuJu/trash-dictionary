@@ -13,7 +13,7 @@ const sequelize = new Sequelize({
     username: DB_USER_NAME,
     password: DB_PASSWORD,
     host: DB_HOST,
-    // logging: false,
+    logging: false,
     dialect: 'postgres',
     models: [Admin,Feed]
 });

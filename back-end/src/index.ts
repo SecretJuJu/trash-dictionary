@@ -3,7 +3,11 @@ import dotenv from "dotenv"
 import express from "express"
 import { ErrorType, errorMessages } from "errors"
 import { sync } from "models"
+// import esClient from 'lib/elasticsearch'
+import env from "config/env"
+
 import app from "app"
+
 
 dotenv.config()
 
@@ -18,5 +22,8 @@ app.get("/custom-errors", (req: express.Request, res: express.Response) => {
 
 app.listen(PORT, () => {
     sync()
+    // if(esClient) {
+    //     console.log("make elasticsearch client success")
+    // }
     console.log('Server listening on port ' +PORT)
 })

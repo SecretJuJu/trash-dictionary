@@ -17,8 +17,9 @@ export default class Feed extends Model {
     title: string
 
     @AllowNull(false)
-    @Column(DataType.ARRAY(DataType.TEXT))
-    tags: Array<string>
+    // @Column(DataType.ARRAY(DataType.STRING))
+    @Column
+    tags: string
 
     @AllowNull(false)
     @Column(DataType.JSON)

@@ -13,18 +13,12 @@ export const createFeed = async (req: express.Request, res: express.Response) =>
     const writter:any = req.user
     let flag = false
     
-    for (let i=0; i<tags.length; i++) {
-        let newTag = tags[i].split(' ')
-        newTag = newTag.filter( (x: string) => x!=='')
-        newTag = newTag.join('_')
-        tags[i] = newTag
-    }
-    
+    const newTags = tags.join(' ')
     
     let feed
     try {
         feed = await Feed.create({
-            title,tags,content,writterId: writter._id
+            title,tags:newTags,content,writterId: writter._id
         })
         flag = true
     } catch (err) {

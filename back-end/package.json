@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.13.0",
     "@types/bcrypt": "^5.0.0",
     "@types/body-parser": "^1.19.0",
     "@types/cors": "^2.8.10",

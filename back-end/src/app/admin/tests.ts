@@ -17,7 +17,8 @@ describe("Admin", async function () {
         sync()
         await Admin.destroy({
             where: {},
-            truncate: true
+            truncate: true,
+            cascade: true
         })
     })
 
@@ -136,7 +137,8 @@ describe("Admin", async function () {
     after(async () => {
         await Admin.destroy({
             where: {},
-            truncate: true
+            truncate: true,
+            cascade: true
         })
     })
 })
