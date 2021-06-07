@@ -5,7 +5,7 @@ import Admin from 'models/admin.model'
 import Feed from 'models/feed.model'
 import { Op } from 'sequelize/types'
 import getErrorMessage from 'utils/errors'
-
+import { searchWithKeyword } from '../../elasticsearch'
 
 export const createFeed = async (req: express.Request, res: express.Response) => {
     
@@ -32,20 +32,13 @@ export const createFeed = async (req: express.Request, res: express.Response) =>
 }
 
 export const searchFeed = async (req: express.Request, res: express.Response) => {
-    const search: any = req.query.search
-    
-    const queries: Array<string> = search.split(' ')
-    res.send("testing")
-    // try {
-    //     await Feed.findAll({
-    //         where: {
-    //             tags: {
-    //                 [Op.overlap]: queries,
-    //             },
-    //         },
-    //         raw: true
-    //     })
-    // } catch (err) {
+    const keyword: any = req.query.search // type : string 
 
-    // }
+    const result = await searchWithKeyword(keyword)
+    
+    if( result === null) {
+        console.log("error occured")
+    } else {
+        return res.json(result.body)
+    }
 }

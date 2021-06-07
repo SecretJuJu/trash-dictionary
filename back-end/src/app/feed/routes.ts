@@ -27,5 +27,5 @@ const searchFeedValidator = [
 ]
 
 router.post('/createFeed',tokenCheckMiddleware,createFeedValidator,createFeed)
-router.get('searchFeedValidator',searchFeedValidator,searchFeed)
+router.get('/searchFeed',searchFeedValidator,searchFeed)
 export default router
