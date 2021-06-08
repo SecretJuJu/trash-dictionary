@@ -9,16 +9,15 @@ import { searchWithKeyword } from '../../elasticsearch'
 
 export const createFeed = async (req: express.Request, res: express.Response) => {
     
-    const { title, tags, content } = req.body
+    const { title, content } = req.body
     const writter:any = req.user
     let flag = false
     
-    const newTags = tags.join(' ')
     
     let feed
     try {
         feed = await Feed.create({
-            title,tags:newTags,content,writterId: writter._id
+            title,content,writterId: writter._id
         })
         flag = true
     } catch (err) {
@@ -38,6 +37,7 @@ export const searchFeed = async (req: express.Request, res: express.Response) =>
     
     if( result === null) {
         console.log("error occured")
+        return res.status(500).json(getErrorMessage(ErrorType.UnexpectedError))
     } else {
         return res.json(result.body)
     }

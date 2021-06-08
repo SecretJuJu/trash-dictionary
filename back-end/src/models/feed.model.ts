@@ -3,7 +3,8 @@ import Admin from './admin.model'
 
 @Table({
     tableName: "feeds",
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: true
 })
 export default class Feed extends Model {
     @IsUUID(4)
@@ -15,14 +16,9 @@ export default class Feed extends Model {
     @AllowNull(false)
     @Column
     title: string
-
+    
     @AllowNull(false)
-    // @Column(DataType.ARRAY(DataType.STRING))
     @Column
-    tags: string
-
-    @AllowNull(false)
-    @Column(DataType.JSON)
     content: string
 
     @AllowNull(false)

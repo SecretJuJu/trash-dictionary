@@ -17,10 +17,10 @@ export const Login = () => {
     const handleSubmit = async (event:any) => {
 
         event.preventDefault();
-        console.log(values)
         let user,token, response, err, errorType, errorMsg;
         
         try {
+            console.log("login start")
             toggleLoading(true)
             response = await axios.post(env.BACKEND_BASEURL+'/api/admin/auth',{
                 email: values.email,
@@ -31,11 +31,13 @@ export const Login = () => {
             
         } catch (error) {
             err = error
+            console.log(err)
             if(error?.response?.data?.errorType === 'loginFailed') {
                 errorType = error?.response?.data?.errorType
                 errorMsg = error?.response?.data?.msg
             }
         } finally {
+            console.log("login done")
             toggleLoading(false)
         }
         

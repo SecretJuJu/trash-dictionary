@@ -14,7 +14,9 @@ export const ToLogin = () => {
     }, []);
     const hideLogin = () => {
         const toLoginWarpperEl: any= document.querySelector('.to-login-wrapper');
-        toLoginWarpperEl.style.display = 'none';
+        if ( toLoginWarpperEl ) {
+            toLoginWarpperEl.style.display = 'none';
+        }
     }
     const checkLogined = async () => {
         const token = localStorage.getItem('token')

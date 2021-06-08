@@ -14,10 +14,7 @@ const tokenCheckMiddleware = [
 const createFeedValidator = [
     body("title")
         .notEmpty().isString(),
-    body("tags")
-        .notEmpty().isArray()
-        .custom(value => value.every((x: string) => typeof x === "string")),
-    body("content").isObject(),
+    body("content").isString(),
     validationResultChecker
 ]
 

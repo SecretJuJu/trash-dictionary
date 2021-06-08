@@ -3,7 +3,8 @@ import Feed from 'models/feed.model'
 
 @Table({
   tableName: "admins",
-  freezeTableName: true
+  freezeTableName: true,
+  timestamps: true
 })
 export default class Admin extends Model {
   @IsUUID(4)
