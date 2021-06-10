@@ -14,7 +14,8 @@ const config = {
     ES_CONFIG: {
         ES_URL: process.env.ES_URL || "http://localhost:9200",
         ES_INDEX: process.env.ES_INDEX || "trash_dictionary_es",
-        ES_TYPE: process.env.ES_TYPE || "feed"
+        ES_TYPE: process.env.ES_TYPE || "feed",
+        ES_SEARCH_SIZE: process.env.ES_SEARCH_SIZE || "10"
     }
 }
 

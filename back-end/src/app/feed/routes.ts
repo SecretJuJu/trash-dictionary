@@ -20,7 +20,8 @@ const createFeedValidator = [
 
 const searchFeedValidator = [
     query("search")
-        .notEmpty().isString()
+        .notEmpty().isString(),
+    validationResultChecker
 ]
 
 router.post('/createFeed',tokenCheckMiddleware,createFeedValidator,createFeed)
