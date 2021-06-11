@@ -4,7 +4,8 @@ enum ErrorType {
     EmailExist = "EmailAlreadyExist",
     UsernameExist = "UsernameAlreadyExist",
     LoginFailed = "loginFailed",
-    AccessDenied = "accessDenied"
+    AccessDenied = "accessDenied",
+    NotExist= "notExist"
 }
 
 export default ErrorType

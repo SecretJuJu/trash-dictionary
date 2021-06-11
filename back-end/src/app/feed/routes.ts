@@ -3,7 +3,7 @@ import { body, query } from 'express-validator';
 import { validationResultChecker } from 'middlewares';
 import passport from 'passport';
 
-import {createFeed,searchFeed} from './controller'
+import {browseFeed, createFeed,searchFeed} from './controller'
 
 const router = express.Router();
 
@@ -26,4 +26,5 @@ const searchFeedValidator = [
 
 router.post('/createFeed',tokenCheckMiddleware,createFeedValidator,createFeed)
 router.get('/searchFeed',searchFeedValidator,searchFeed)
+router.get('/browse/:id',browseFeed)
 export default router

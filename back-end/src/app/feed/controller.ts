@@ -1,5 +1,5 @@
 import { ErrorType } from 'errors'
-import express from 'express'
+import express, { raw } from 'express'
 
 import Admin from 'models/admin.model'
 import Feed from 'models/feed.model'
@@ -41,4 +41,30 @@ export const searchFeed = async (req: express.Request, res: express.Response) =>
     } else {
         return res.json(result.body)
     }
+}
+
+export const browseFeed = async (req: express.Request, res: express.Response) => {
+    const { id } = req.params
+    let feed
+    try {
+        feed = await Feed.findOne({
+            where: {_id: id},
+            raw: true,
+            include: [
+                { 
+                    model: Admin,
+                    attributes: ["username","email"],
+                    required: true
+                }
+            ]
+        })
+    } catch (err ) {
+        console.log(err)
+        return res.status(500).json(getErrorMessage(ErrorType.UnexpectedError))
+    }
+    if ( feed !== null ) { 
+        return res.json(feed)
+    } else {
+        return res.status(400).json(getErrorMessage(ErrorType.NotExist))
+    } 
 }

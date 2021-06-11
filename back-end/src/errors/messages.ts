@@ -7,6 +7,7 @@ const errorMessages = {
     [ErrorType.ValidationError]: "The data you sent is not valid.",
     [ErrorType.LoginFailed]: "Failed to login.",
     [ErrorType.AccessDenied]: "Access denied.",
+    [ErrorType.NotExist]: "Not Exist"
 }
 
 export default errorMessages
