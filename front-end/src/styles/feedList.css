@@ -34,3 +34,17 @@
     text-overflow: ellipsis;
     height: 40px;
 }
+.newFeed {
+    background: #054d95;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.newFeed button {
+    width: 100%;
+    height: 55px;
+    display: block;
+    border: 0;
+    background: #fff;
+}

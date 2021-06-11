@@ -12,6 +12,9 @@ class App extends Component {
         <Route exact path="/login" component={Routes.Login}/>
         <Route exact path="/register" component={Routes.Register}/>
         <Route exact path="/logout" component={Routes.Logout}/>
+        <Route path="*">
+          <div> 404 Not Found </div>
+        </Route>
       </div>
     );
   }
