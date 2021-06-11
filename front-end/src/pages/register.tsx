@@ -1,7 +1,7 @@
 import { Register as RegisterComponent } from '../components/register';
 import '../styles/register.css'
 
-export const Register = () => {
+const Register = () => {
     return (
         <>
             <RegisterComponent />
@@ -9,3 +9,5 @@ export const Register = () => {
     )
    
 }
+
+export default Register

@@ -4,7 +4,7 @@ import { FeedList } from '../components/feedList'
 
 import '../styles/home.css'
 
-export const Home = () => {
+const Home = () => {
   const handleSearchResponse = (response:any) => {
     console.log(response)
   }
@@ -18,3 +18,5 @@ export const Home = () => {
     </>
   )
 }
+
+export default Home

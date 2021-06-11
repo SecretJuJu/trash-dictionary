@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
-export const Logout = (props: any) => {
+const Logout = (props: any) => {
     
     useEffect(() => {
         localStorage.clear();
@@ -13,3 +13,5 @@ export const Logout = (props: any) => {
         </>
     )
 }
+
+export default Logout
