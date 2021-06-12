@@ -14,6 +14,10 @@ const uploadImageCallBack = async () => {
 
 const EditorContainer = () => {
   const [editorState,setEditorState] = useState(EditorState.createEmpty())
+  const [title,setTitle] = useState("")
+  const handleTitleChange = (e: any) => {
+    setTitle(e.target.value)
+  }
   const onEditorStateChange = (newState: React.SetStateAction<EditorState>) => {
     setEditorState(newState)
   }
@@ -21,16 +25,30 @@ const EditorContainer = () => {
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
     return html
   }
+
+  const validateValues = (title:string, content:string) => {
+    console.log("content: ",content)
+    if ( title && content) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const uploadFeed = async () => {
     const html: string = editorToHtml()
-    console.log("html : ",html)
-    // console.log("filtered html : ",xssFilters.inHTMLData(html))
+    const isValidated = validateValues(title,html)
+    if ( !isValidated ) {
+      alert("내용을 알맞게 작성 해 주세요")
+      return 
+    }
+
     try {
       console.log("bearer "+localStorage.getItem("token"))
       const response = await axios.post(env.BACKEND_BASEURL+"/api/feed/createFeed",
         {
-          title:"im title",
-          content:"im test content"
+          title: title,
+          content: html
         },
         {
           headers: {
@@ -58,7 +76,8 @@ const EditorContainer = () => {
               name="title" 
               placeholder="제목을 입력 해 주세요"
               required
-              autoComplete="off" 
+              autoComplete="off"
+              onChange={handleTitleChange} 
             />
           </h1>
         </div>
