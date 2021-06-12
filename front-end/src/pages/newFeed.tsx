@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-
+import EditorContainer from '../components/editor'
 const NewFeed = () => {
     
     return (
         <>
-
+            <EditorContainer />
         </> 
     )
 }

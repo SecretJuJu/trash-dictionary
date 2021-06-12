@@ -35,8 +35,8 @@
     height: 40px;
 }
 .newFeed {
-    background: #054d95;
-    padding: 20px;
+    background: #d3d3d3;
+    padding: 20px 0 20px;
     justify-content: center;
     align-items: center;
 }
@@ -47,4 +47,8 @@
     display: block;
     border: 0;
     background: #fff;
+}
+
+.newFeed button:hover {
+    cursor: pointer;
 }
