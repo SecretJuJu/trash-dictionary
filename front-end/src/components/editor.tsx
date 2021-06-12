@@ -7,12 +7,14 @@ import xssFilters from 'xss-filters';
 import '../styles/editor.css'
 import axios from 'axios';
 import env from '../config/env';
+import { useHistory } from 'react-router-dom';
 
 const uploadImageCallBack = async () => {
 
 }
 
 const EditorContainer = () => {
+  const history = useHistory();
   const [editorState,setEditorState] = useState(EditorState.createEmpty())
   const [title,setTitle] = useState("")
   const handleTitleChange = (e: any) => {
@@ -57,10 +59,11 @@ const EditorContainer = () => {
         }
       )
       console.log(response)
+      history.push("/feed/7f1f483a-889e-4176-bb86-f598c9e865cb")
     } catch (err) {
       console.log("im err",err)
-    
     }
+
   }
   const tempStore = () => {
 
