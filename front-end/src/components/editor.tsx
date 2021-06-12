@@ -3,8 +3,10 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import { EditorState, convertToRaw} from 'draft-js';
-
+import xssFilters from 'xss-filters';
 import '../styles/editor.css'
+import axios from 'axios';
+import env from '../config/env';
 
 const uploadImageCallBack = async () => {
 
@@ -16,12 +18,31 @@ const EditorContainer = () => {
     setEditorState(newState)
   }
   const editorToHtml = () => {
-    
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    console.log(html)
+    return html
   }
-  const uploadFeed = () => {
+  const uploadFeed = async () => {
+    const html: string = editorToHtml()
+    console.log("html : ",html)
+    // console.log("filtered html : ",xssFilters.inHTMLData(html))
+    try {
+      console.log("bearer "+localStorage.getItem("token"))
+      const response = await axios.post(env.BACKEND_BASEURL+"/api/feed/createFeed",
+        {
+          title:"im title",
+          content:"im test content"
+        },
+        {
+          headers: {
+            Authorization: "bearer "+localStorage.getItem("token")
+          }
+        }
+      )
+      console.log(response)
+    } catch (err) {
+      console.log("im err",err)
     
+    }
   }
   const tempStore = () => {
 
