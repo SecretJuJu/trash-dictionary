@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState, convertToRaw} from 'draft-js';
+import { EditorState } from 'draft-js';
 import { convertToHTML, convertFromHTML } from 'draft-convert';
 import '../styles/editor.css'
 import axios from 'axios';
 import env from '../config/env';
 import { useHistory } from 'react-router-dom';
 
-const uploadImageCallBack = async () => {
 
-}
 
 interface IFeedDTO {
   title: string
   content: string
 }
+
+
+
+
+
+
+const uploadImageCallBack = (file:any) => {
+  
+}
+
+
+
+
+
+
+
+
+
+
 
 const EditorContainer = () => {
   const history = useHistory();
@@ -100,6 +117,7 @@ const EditorContainer = () => {
     try {
       const newState = EditorState.push(editorState, convertFromHTML(tempData.content),'undo')
       onEditorStateChange(newState)
+      setTitle(tempData.title)
       alert("임시저장을 불러왔습니다.")
     } catch(err) {
       console.log(err)
@@ -122,6 +140,7 @@ const EditorContainer = () => {
               required
               autoComplete="off"
               onChange={handleTitleChange} 
+              value={title}
             />
           </h1>
         </div>
@@ -130,12 +149,12 @@ const EditorContainer = () => {
             editorState={editorState}
             onEditorStateChange={onEditorStateChange}    
             toolbar={{
+              image: { uploadCallback: uploadImageCallBack, alt: { present: true, mandatory: true } },
               inline: { inDropdown: true },
               list: { inDropdown: true },
               textAlign: { inDropdown: true },
               link: { inDropdown: true },
-              history: { inDropdown: true },
-              image: { uploadCallback: uploadImageCallBack, alt: { present: true, mandatory: true } },
+              history: { inDropdown: true }
             }}
           />
         </div>
