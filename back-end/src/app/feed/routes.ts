@@ -2,7 +2,6 @@ import express from 'express';
 import { body, query } from 'express-validator';
 import { validationResultChecker } from 'middlewares';
 import passport from 'passport';
-
 import {browseFeed, createFeed,searchFeed} from './controller'
 
 const router = express.Router();
@@ -23,6 +22,8 @@ const searchFeedValidator = [
         .notEmpty().isString(),
     validationResultChecker
 ]
+
+
 
 router.post('/createFeed',tokenCheckMiddleware,createFeedValidator,createFeed)
 router.get('/searchFeed',searchFeedValidator,searchFeed)

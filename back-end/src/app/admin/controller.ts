@@ -10,7 +10,7 @@ import { Op } from 'sequelize'
 
 export const register = async (req: express.Request, res: express.Response) => {
     const { username, email, password, secretCode } = req.body
-    if ( secretCode !== env.SECRETKEYS) {
+    if ( secretCode !== env.APP_CONFIG.SECRETKEYS) {
         return res.status(400).json(getErrorMessage(ErrorType.AccessDenied))
     }
     const hashedPassword = await createHashedPassword(password)
@@ -60,7 +60,7 @@ export const auth = (req: express.Request, res: express.Response) => {
                 }
                 return res.status(400).json(response).send()
             }
-            const token = jwt.sign(admin, env.JWT_SECRET)
+            const token = jwt.sign(admin, env.APP_CONFIG.JWT_SECRET)
             return res.json({ admin, token }).send()
         })
     }

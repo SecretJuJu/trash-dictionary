@@ -46,7 +46,7 @@ const setPassport = () => {
         new JWTStrategy(
             {
                 jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-                secretOrKey: env.JWT_SECRET,
+                secretOrKey: env.APP_CONFIG.JWT_SECRET,
             },
             async (jwtPayload: IjwtPayload, done) => {
                 let admin = await Admin.findOne({ where : {_id: jwtPayload._id }, raw: true})
