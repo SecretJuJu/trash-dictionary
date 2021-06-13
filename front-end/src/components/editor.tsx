@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import draftToHtml from 'draftjs-to-html';
 import { EditorState, convertToRaw} from 'draft-js';
-import xssFilters from 'xss-filters';
+import { convertToHTML, convertFromHTML } from 'draft-convert';
 import '../styles/editor.css'
 import axios from 'axios';
 import env from '../config/env';
@@ -11,6 +10,11 @@ import { useHistory } from 'react-router-dom';
 
 const uploadImageCallBack = async () => {
 
+}
+
+interface IFeedDTO {
+  title: string
+  content: string
 }
 
 const EditorContainer = () => {
@@ -24,7 +28,7 @@ const EditorContainer = () => {
     setEditorState(newState)
   }
   const editorToHtml = () => {
-    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    const html = convertToHTML(editorState.getCurrentContent())
     return html
   }
 
@@ -65,9 +69,46 @@ const EditorContainer = () => {
     }
 
   }
+  
   const tempStore = () => {
-
+    const tempData: IFeedDTO = {
+      title: title,
+      content: editorToHtml()
+    }
+    
+    localStorage.setItem("tempStored",JSON.stringify(tempData))
   }
+  
+  const getTempData = () => {
+    const tempString:any = (localStorage.getItem("tempStored") !== null)? localStorage.getItem("tempStored"): null
+    let tempData: IFeedDTO
+    try {
+      tempData = JSON.parse(tempString)
+      return tempData
+    } catch (err) {
+      console.log(err)
+      alert("임시저장을 불러오는데 실패했습니다.")
+      return null
+    }
+  }
+
+  const loadTmp = () => {
+    const tempData = getTempData()
+    if (tempData === null) {
+      return
+    }
+    try {
+      const newState = EditorState.push(editorState, convertFromHTML(tempData.content),'undo')
+      onEditorStateChange(newState)
+      alert("임시저장을 불러왔습니다.")
+    } catch(err) {
+      console.log(err)
+      alert("임시저장 불러오기 실패")
+      return
+    }
+    
+  }
+
   return (
     <>
     <div>
@@ -104,6 +145,9 @@ const EditorContainer = () => {
           </button>
           <button onClick={tempStore}>
             임시저장
+          </button>
+          <button onClick={loadTmp}>
+            임시저장 불러오기
           </button>
         </div>
       </div>
