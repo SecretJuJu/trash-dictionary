@@ -1,15 +1,22 @@
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Logout = (props: any) => {
     
+    const history = useHistory()
+
     useEffect(() => {
         localStorage.clear();
     }, []);
     
+
+    const toHome = () => {
+        history.push("/")
+    }
+
     return (
         <>
-            <Redirect to="/" />
+            { toHome() }
         </>
     )
 }

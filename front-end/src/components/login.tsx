@@ -4,7 +4,7 @@ import env from '../config/env'
 import '../styles/login.css'
 import { useState } from 'react';
 
-export const Login = () => {
+export const Login = (props: any) => {
     const [values, setValues] = useState({ email: "", password: "" });
     const [redirect, setRedirect] = useState("")
     const [loading, toggleLoading] = useState(false);

@@ -3,10 +3,7 @@ import '../styles/feedList.css'
 
 
 export const FeedList = (props: any) => {
-    const history = useHistory()
-    const moveToNewFeed = () => {
-        history.push("/newFeed")
-    }
+    
 
     return (
         <>
@@ -22,11 +19,7 @@ export const FeedList = (props: any) => {
                             뭐시기 뭐시기
                         </p>
                     </li>
-                    <li className="feed newFeed">
-                        <button onClick={moveToNewFeed}>
-                            NEW FEED
-                        </button>
-                    </li>
+                    
                 {/* {
                     arr.map(item => {
                     return <li>{item}</li>

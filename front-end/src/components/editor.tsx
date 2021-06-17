@@ -18,22 +18,6 @@ interface IFeedDTO {
 
 
 
-
-
-const uploadImageCallBack = (file:any) => {
-  
-}
-
-
-
-
-
-
-
-
-
-
-
 const EditorContainer = () => {
   const history = useHistory();
   const [editorState,setEditorState] = useState(EditorState.createEmpty())
@@ -149,7 +133,7 @@ const EditorContainer = () => {
             editorState={editorState}
             onEditorStateChange={onEditorStateChange}    
             toolbar={{
-              image: { uploadCallback: uploadImageCallBack, alt: { present: true, mandatory: true } },
+              image: { alt: { present: true, mandatory: true } },
               inline: { inDropdown: true },
               list: { inDropdown: true },
               textAlign: { inDropdown: true },

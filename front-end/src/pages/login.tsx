@@ -1,6 +1,7 @@
 import {Login as LoginComponent} from '../components/login'
 
-const Login = () => {
+const Login = (props: any) => {
+    
     return ( 
         <>
             <LoginComponent />

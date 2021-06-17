@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {Link, useHistory} from "react-router-dom";
+import { checkLogined } from '../utils/auth';
 import '../styles/toLogin.css'
 
 export const ToLogin = () => {
     const history = useHistory();
     const [isLogined, setIsLogined] = useState(false);
     useEffect(() => {
-        checkLogined()
+        setIsLogined(checkLogined())
         setTimeout(() => {
             // no display
             hideLogin()
@@ -18,15 +19,7 @@ export const ToLogin = () => {
             toLoginWarpperEl.style.display = 'none';
         }
     }
-    const checkLogined = async () => {
-        const token = localStorage.getItem('token')
-        const user = localStorage.getItem('user')
-        if (token && user) {
-            setIsLogined(true);
-        } else {
-            setIsLogined(false);
-        }
-    }
+    
 
     const getAdminName = () => {
         const userString = localStorage.getItem('user')
