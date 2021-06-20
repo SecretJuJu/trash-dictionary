@@ -5,14 +5,14 @@ import { FeedList } from '../components/feedList'
 import NewFeedBtn from '../components/newFeedBtn'
 import '../styles/home.css'
 
-interface ISource {
+export interface ISource {
   readonly timestamp: Date
   readonly content: string
   readonly id: string
   readonly title: string
 }
 
-interface IHit {
+export interface IHit {
   readonly _id: string
   readonly _score: number
   readonly _source: ISource

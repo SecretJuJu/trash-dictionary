@@ -22,6 +22,9 @@
     margin-bottom: 30px;
     min-height: 62px;
 }
+.feed :hover {
+    background: #fff;
+}
 .feed-title {
     font-size: large;
     padding-left: 20px

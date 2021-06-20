@@ -63,9 +63,10 @@ const EditorContainer = () => {
           }
         }
       )
-      console.log(response)
-      history.push("/feed/7f1f483a-889e-4176-bb86-f598c9e865cb")
+      const _id = response?.data?._id
+      history.push(`/feed/${_id}`)
     } catch (err) {
+      alert("업로드 실패..")
       console.log("im err",err)
     }
 
@@ -96,6 +97,7 @@ const EditorContainer = () => {
   const loadTmp = () => {
     const tempData = getTempData()
     if (tempData === null) {
+      alert("불러올 임시저장이 없습니다.")
       return
     }
     try {
