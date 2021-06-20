@@ -27,24 +27,22 @@ export const FeedList = (props: any) => {
                 <ul className="feed-list">
                     
                 {
-                    feeds.map( item => {
+                    feeds.map( (item,index) => {
                         return (
-                            <>
-                                <li className="feed" 
-                                    key={item.id}
-                                    onMouseEnter={(e) => toggleBackground(e,true)}
-                                    onMouseLeave={(e) => toggleBackground(e,false)}
-                                >
-                                    <h1 className="feed-title">
-                                        {item.title}
-                                    </h1>
-                                    <p className="feed-content">
-                                        {
-                                            item.content.replace(/<[^>]*>?/gm, '')
-                                        }
-                                    </p>
-                                </li>
-                            </>
+                            <li className="feed" 
+                                onMouseEnter={(e) => toggleBackground(e,true)}
+                                onMouseLeave={(e) => toggleBackground(e,false)}
+                                key={index}
+                            >
+                                <h1 className="feed-title">
+                                    {item.title}
+                                </h1>
+                                <p className="feed-content">
+                                    {
+                                        item.content.replace(/<[^>]*>?/gm, '')
+                                    }
+                                </p>
+                            </li>
                             
                         )
                     })
