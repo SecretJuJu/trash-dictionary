@@ -37,18 +37,21 @@ const Feed = (props: any) => {
         try {
             const response = await axios.get(`${env.BACKEND_BASEURL}/api/feed/browse/${id}`)
             const feed: IFeed = response.data
-            // console.log(feed)
             return feed
         } catch (err) {
             console.log(err)
-            // alert("error on searching!")
             return tmp
         }
+    }
+    const fetchFeedData = async (id: string) => {
+        console.log("fetched")
+        const feed = await getFeed(id)
+        setFeedData(feed)
     }
 
     return (
         <>
-            <FeedComponent feedData={feedData}/>
+            <FeedComponent feedData={feedData} fetchFeedData={fetchFeedData}/>
         </>
     )
 }
