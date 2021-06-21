@@ -31,7 +31,7 @@ export const Search = (props: any) => {
       }
     }
     fetchData()
-  })
+  },[])
 
   const searchWithKeyword = async (keyword: string) => {
     if (!keyword) {
