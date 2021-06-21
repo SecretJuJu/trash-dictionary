@@ -8,9 +8,10 @@ export const FeedList = (props: any) => {
     console.log(props.feeds)
     const feeds: Array<ISource> = props.feeds
     
-    // const moveToFeed = (e) => {
-    //     e.target
-    // }
+    const moveToFeed = (e: any) => {
+        const feedId = e.currentTarget.id
+        history.push(`/feed/${feedId}`)
+    }
     const toggleBackground = (e: any,status: boolean) => {
         const nodes = e.currentTarget.childNodes
         let changeTo = "none"
@@ -32,7 +33,9 @@ export const FeedList = (props: any) => {
                             <li className="feed" 
                                 onMouseEnter={(e) => toggleBackground(e,true)}
                                 onMouseLeave={(e) => toggleBackground(e,false)}
+                                onClick={moveToFeed}
                                 key={index}
+                                id={item.id}
                             >
                                 <h1 className="feed-title">
                                     {item.title}
