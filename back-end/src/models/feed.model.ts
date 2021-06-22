@@ -28,4 +28,8 @@ export default class Feed extends Model {
     
     @BelongsTo(() => Admin)
     writter: Admin
+
+    @Column
+    @Default(false)
+    isDeleted: boolean
 }

@@ -20,6 +20,9 @@ export const searchWithKeyword = async ( keyword: string, options?: searchOption
                         query: keyword,
                         analyzer: "korean"
                     }
+                },
+                filter: {
+                    
                 }
             }
         })
