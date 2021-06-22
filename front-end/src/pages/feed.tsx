@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import FeedComponent from "../components/feed"
 import env from "../config/env"
-
+import C404 from "../components/404"
 interface IFeed {
     _id: string
     title: string
@@ -20,6 +20,8 @@ let tmp:IFeed
 const Feed = (props: any) => {
     const history = useHistory()
     const [feedData,setFeedData] = useState(tmp)
+    const [feedExist,setFeedExist] = useState(true)
+
     useEffect(() => {
         const feedId = props?.match?.params?.id
         if (!feedId) {
@@ -29,6 +31,11 @@ const Feed = (props: any) => {
         }
         const fetchData = async() => {
             const feed = await getFeed(feedId)
+            if ( feed === null) {
+                console.log("feed is null")
+                setFeedExist(false)
+                return
+            }
             setFeedData(feed)
         }
         fetchData()
@@ -39,19 +46,34 @@ const Feed = (props: any) => {
             const feed: IFeed = response.data
             return feed
         } catch (err) {
-            console.log(err)
-            return tmp
+            
+            if (err?.response?.data?.errorType === "notExist") { // notExist
+                alert("게시물이 존재하지 않습니다.")
+                return null
+            }
+            
+            return null
         }
     }
     const fetchFeedData = async (id: string) => {
         console.log("fetched")
         const feed = await getFeed(id)
+        if (feed === null) {
+            setFeedExist(false)
+            return
+        }
         setFeedData(feed)
     }
 
     return (
-        <>
-            <FeedComponent feedData={feedData} fetchFeedData={fetchFeedData}/>
+        <>  
+            {
+                feedExist?
+                <FeedComponent feedData={feedData} fetchFeedData={fetchFeedData}/>
+                :
+                <C404 />
+            }
+             
         </>
     )
 }

@@ -7,7 +7,7 @@ export const FeedList = (props: any) => {
     console.log("props feed list")
     console.log(props.feeds)
     const feeds: Array<ISource> = props.feeds
-    
+    console.log((feeds!==[] && !!feeds))
     const moveToFeed = (e: any) => {
         const feedId = e.currentTarget.id
         history.push(`/feed/${feedId}`)
@@ -26,6 +26,13 @@ export const FeedList = (props: any) => {
         <>
             <div className="feed-list-wrapper">
                 <ul className="feed-list">
+                {
+                    (feeds?.length !== 0)? <></>
+                    :
+                    <div className="no-search-result">
+                        검색 결과가 없습니다.
+                    </div>
+                }
                     
                 {
                     feeds.map( (item,index) => {
