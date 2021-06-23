@@ -14,16 +14,22 @@ export const searchWithKeyword = async ( keyword: string, options?: searchOption
             index: env.ES_CONFIG.ES_INDEX,
             size: searchSize,
             from: options?.from? options.from: 0,
-            body: {
+            body : {
                 query: {
-                    query_string: {
-                        query: keyword,
-                        analyzer: "korean"
+                bool: {
+                  must_not: {
+                    term: {
+                        is_deleted:true
                     }
-                },
-                filter: {
-                    
+                  }, 
+                  must: {
+                    multi_match: {
+                      query: keyword,
+                      fields: ["title","content"]
+                    }
+                  }
                 }
+              }
             }
         })
         return result

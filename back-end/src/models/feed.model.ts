@@ -4,7 +4,9 @@ import Admin from './admin.model'
 @Table({
     tableName: "feeds",
     freezeTableName: true,
-    timestamps: true
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
 })
 export default class Feed extends Model {
     @IsUUID(4)
@@ -29,7 +31,7 @@ export default class Feed extends Model {
     @BelongsTo(() => Admin)
     writter: Admin
 
-    @Column
     @Default(false)
-    isDeleted: boolean
+    @Column
+    is_deleted: boolean
 }

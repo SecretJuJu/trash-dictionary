@@ -68,3 +68,31 @@ export const browseFeed = async (req: express.Request, res: express.Response) =>
         return res.status(400).json(getErrorMessage(ErrorType.NotExist))
     } 
 }
+
+export const deleteFeed = async (req: express.Request, res: express.Response) => {
+    const { id } = req.body
+    try {
+        const isExist = await Feed.findOne({
+            where: {
+                isDeleted: false,
+                _id: id
+            },
+            raw: true
+        })
+        if (!isExist) {
+            return res.status(400).json(getErrorMessage(ErrorType.NotExist))
+        }
+        await Feed.update({
+            isDeleted: true
+        },{
+            where: {
+                isDeleted: false,
+                _id: id
+            }
+        })
+    }
+    catch (err) {
+        console.log(err)
+        return res.status(500).json(getErrorMessage(ErrorType.UnexpectedError))
+    }
+} 
