@@ -32,6 +32,8 @@ const Home = (props: any) => {
     const hits = response.data.hits
     const sources = getSources(hits)
     setFeeds(sources)
+    console.log("feeds ------")
+    console.log(sources)
   }
   return (
     <>

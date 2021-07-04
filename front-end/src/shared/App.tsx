@@ -11,6 +11,7 @@ const App = (props: any) =>{
   })
 
   const checkLogin = () => {
+    console.log(`is user logined? : ${checkLogined()}`)
     setIsLogined(checkLogined())
   }
 
@@ -20,13 +21,12 @@ const App = (props: any) =>{
       <Route exact path="/login" render={()=> <Routes.Login />}/>
       <Route exact path="/register" component={Routes.Register}/>
       <Route exact path="/logout" component={Routes.Logout}/>
+      <Route exact path="/feed/:id" render={(env)=> <Routes.Feed id={env.match.params.id} isLogined={isLogined}/>}/>
       {
         isLogined?
-        
           <Route exact path="/newFeed" component={Routes.NewFeed}></Route>
         : <></>
       }
-      <Route exact path="/feed/:id" component={Routes.Feed}/>
       <Route>
         <div> 404 Not Found </div>
       </Route>

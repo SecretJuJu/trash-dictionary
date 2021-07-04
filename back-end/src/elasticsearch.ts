@@ -9,23 +9,24 @@ export interface searchOptions {
 
 export const searchWithKeyword = async ( keyword: string, options?: searchOptions ) => {
     const searchSize: number = parseInt(env.ES_CONFIG.ES_SEARCH_SIZE)
+    console.log(keyword)
     try {
         const result = await client.search({
             index: env.ES_CONFIG.ES_INDEX,
             size: searchSize,
             from: options?.from? options.from: 0,
-            body : {
-                query: {
-                bool: {
-                  must_not: {
-                    term: {
-                        is_deleted:true
+            body: {
+              "query": {
+                "bool": {
+                  "must_not": {
+                    "term": {
+                      "is_deleted":true
                     }
                   }, 
-                  must: {
-                    multi_match: {
-                      query: keyword,
-                      fields: ["title","content"]
+                  "must": {
+                    "multi_match": {
+                      "query": keyword,
+                      "fields": ["title","content"]
                     }
                   }
                 }

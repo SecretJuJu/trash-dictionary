@@ -23,7 +23,8 @@ const Feed = (props: any) => {
     const [feedExist,setFeedExist] = useState(true)
 
     useEffect(() => {
-        const feedId = props?.match?.params?.id
+        const feedId = props?.id
+        console.log(`feedId : ${feedId}`)
         if (!feedId) {
             alert("잘못된 URL입니다.")
             history.push("/")
@@ -56,7 +57,6 @@ const Feed = (props: any) => {
         }
     }
     const fetchFeedData = async (id: string) => {
-        console.log("fetched")
         const feed = await getFeed(id)
         if (feed === null) {
             setFeedExist(false)
@@ -69,7 +69,7 @@ const Feed = (props: any) => {
         <>  
             {
                 feedExist?
-                <FeedComponent feedData={feedData} fetchFeedData={fetchFeedData}/>
+                <FeedComponent feedData={feedData} fetchFeedData={fetchFeedData} isLogined={props.isLogined}/>
                 :
                 <C404 />
             }

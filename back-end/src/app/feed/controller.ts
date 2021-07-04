@@ -45,6 +45,7 @@ export const searchFeed = async (req: express.Request, res: express.Response) =>
 
 export const browseFeed = async (req: express.Request, res: express.Response) => {
     const { id } = req.params
+    console.log(`id : ${id}`)
     let feed
     try {
         feed = await Feed.findOne({
