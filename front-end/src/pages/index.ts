@@ -4,6 +4,7 @@ import Logout from './logout'
 import Register from './register'
 import NewFeed from './newFeed'
 import Feed from './feed'
+import ModifyFeed from './modifyFeed'
 
 export default {
     Home,
@@ -12,4 +13,5 @@ export default {
     Logout,
     NewFeed,
     Feed,
+    ModifyFeed
 }
